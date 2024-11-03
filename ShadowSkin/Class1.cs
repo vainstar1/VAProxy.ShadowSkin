@@ -231,7 +231,18 @@ public class SinModelSwap : BaseUnityPlugin
     {
         if (senCorrupt != null)
         {
-            senCorrupt.SetActive(false);
+            Renderer corruptRenderer = senCorrupt.GetComponent<Renderer>();
+            if (corruptRenderer != null)
+            {
+                corruptRenderer.enabled = false;
+            }
+
+            Transform corruptTransform = senCorrupt.transform;
+            Transform eyeActiveTransform = corruptTransform.Find("EyeActive");
+            if (eyeActiveTransform != null)
+            {
+                eyeActiveTransform.gameObject.SetActive(false);
+            }
         }
     }
 }
